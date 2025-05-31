@@ -3,12 +3,19 @@ package com.gs.alagamenos.model;
 import java.time.LocalDate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Schema(description = "Esta classe irá representar a entidade Usuario")
+@Data
+@Entity
+@Table(name = "USUARIO")
 public class Usuario {
 
 	@Schema(description = "Este atributo representa a chave primária ID", example = "1")
