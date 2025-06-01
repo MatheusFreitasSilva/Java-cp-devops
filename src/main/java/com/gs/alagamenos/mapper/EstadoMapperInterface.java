@@ -14,3 +14,4 @@ public interface EstadoMapperInterface {
 	Estado toEntity(EstadoDTO toDTO);
 
 }
+

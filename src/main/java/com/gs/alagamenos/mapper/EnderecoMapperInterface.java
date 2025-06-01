@@ -8,9 +8,10 @@ import com.gs.alagamenos.model.Endereco;
 
 @Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface EnderecoMapperInterface {
-
+	
 	EnderecoDTO toDTO(Endereco endereco);
 	
 	Endereco toEntity(EnderecoDTO toDTO);
-	
+
 }
+

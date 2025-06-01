@@ -19,7 +19,7 @@ public class SwaggerConfiguration {
 											+ "estado, cidade, bairro, rua, endereco, alerta e usuario "
 											+ "em uma aplicação de alto nível de "
 											+ "maturidade utilizando de recursos do framework SpringBoot")
-											.summary("Este projeto visa gerenciar um sistema de alertas de alagamentos")
+											.summary("Gerenciador de alertas de alagamentos")
 											.version("v1.0.0")
 											.license(new License().url("https://github.com/GS-2025-1/Java.git")
 																  .name("Alagamenos")));
