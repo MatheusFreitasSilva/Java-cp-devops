@@ -56,7 +56,7 @@ public class AlertaController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de AlertaDTO de forma paginada", 
 			summary = "Retorna páginas de AlertaDTO",
-			tags = "Retorno de informação")
+			tags = "Alerta - Retorno de informações")
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<AlertaDTO>> retornarAlertasPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +72,7 @@ public class AlertaController {
 	// GET All
 	@Operation(description = "Retorna todos os alertas",
 			summary = "Retorna todos os alertas",
-			tags = "Retorno de informação")
+			tags = "Alerta - Retorno de informações")
 	@GetMapping(value = "/todas")
 	public List<AlertaDTO> retornaTodosAlertas(){
 		
@@ -82,7 +82,7 @@ public class AlertaController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os alertas existentes no Cache",
 			summary = "Retorna todos os alertas utilizando Caching",
-			tags = "Retorno de informação")
+			tags = "Alerta - Retorno de informações")
 	@GetMapping(value = "/todas_cacheable")
 	public List<AlertaDTO> retonaTodosAlertasCacheable(){
 		
@@ -92,7 +92,7 @@ public class AlertaController {
 	// GET By Id
 	@Operation(description = "Retorna um alerta com base em um ID",
 			summary = "Retorna um alerta com base em um ID",
-			tags = "Retorno de informação")
+			tags = "Alerta - Retorno de informações")
 	@GetMapping(value = "/{id}")
 	public AlertaDTO retornaAlertaPorId(@PathVariable Long id) {
 		
@@ -108,7 +108,7 @@ public class AlertaController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de alertas",
 			summary = "Inserir um novo alerta",
-			tags = "Inserção de informações")
+			tags = "Alerta - Inserção de informações")
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Alerta> inserirAlerta(@RequestBody @Valid Alerta alerta) {
 		
@@ -121,7 +121,7 @@ public class AlertaController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de alertas",
 			summary = "Atualiza um novo alerta",
-			tags = "Inserção de informações")
+			tags = "Alerta - Inserção de informações")
 	@PutMapping(value = "/atualizar/{id}")
 	public Alerta atualizarAlerta(@PathVariable Long id, @RequestBody Alerta alerta) {
 		
@@ -130,7 +130,7 @@ public class AlertaController {
 		if(op.isPresent()) {
 			Alerta alerta_antigo = op.get();
 			alerta_antigo.setMensagem(alerta.getMensagem());
-			alerta_antigo.setData_criacao(alerta.getData_criacao());
+			alerta_antigo.setDataCriacao(alerta.getDataCriacao());
 			alerta_antigo.setRua(alerta.getRua());
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -142,7 +142,7 @@ public class AlertaController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de alertas",
 			summary = "Exclui um novo alerta",
-			tags = "Remoção de informações")
+			tags = "Alerta - Remoção de informações")
 	@DeleteMapping(value = "/excluir/{id}")
 	public Alerta excluirAlerta(@PathVariable Long id) {
 		

@@ -3,6 +3,9 @@ package com.gs.alagamenos.dto;
 import com.gs.alagamenos.model.Rua;
 import com.gs.alagamenos.model.Usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(hidden = true)
 public class EnderecoDTO {
 
 	private long id;

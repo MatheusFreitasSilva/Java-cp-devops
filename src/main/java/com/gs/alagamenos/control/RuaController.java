@@ -56,7 +56,7 @@ public class RuaController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de RuaDTO de forma paginada", 
 			summary = "Retorna páginas de RuaDTO",
-			tags = "Retorno de informação")
+			tags = "Rua - Retorno de informações")
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<RuaDTO>> retornarRuasPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +72,7 @@ public class RuaController {
 	// GET All
 	@Operation(description = "Retorna todas as ruas",
 			summary = "Retorna todos as ruas",
-			tags = "Retorno de informação")
+			tags = "Rua - Retorno de informações")
 	@GetMapping(value = "/todas")
 	public List<RuaDTO> retornaTodasRuas(){
 		
@@ -82,7 +82,7 @@ public class RuaController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todas as ruas existentes no Cache",
 			summary = "Retorna todas as ruas utilizando Caching",
-			tags = "Retorno de informação")
+			tags = "Rua - Retorno de informações")
 	@GetMapping(value = "/todas_cacheable")
 	public List<RuaDTO> retonaTodasRuasCacheable(){
 		
@@ -92,7 +92,7 @@ public class RuaController {
 	// GET By Id
 	@Operation(description = "Retorna uma rua com base em um ID",
 			summary = "Retorna uma rua com base em um ID",
-			tags = "Retorno de informação")
+			tags = "Rua - Retorno de informações")
 	@GetMapping(value = "/{id}")
 	public RuaDTO retornaRuaPorId(@PathVariable Long id) {
 		
@@ -108,7 +108,7 @@ public class RuaController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de ruas",
 			summary = "Inserir uma nova rua",
-			tags = "Inserção de informações")
+			tags = "Rua - Inserção de informações")
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Rua> inserirRua(@RequestBody @Valid Rua rua) {
 		
@@ -121,7 +121,7 @@ public class RuaController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de ruas",
 			summary = "Atualiza uma nova rua",
-			tags = "Inserção de informações")
+			tags = "Rua - Inserção de informações")
 	@PutMapping(value = "/atualizar/{id}")
 	public Rua atualizarRua(@PathVariable Long id, @RequestBody Rua rua) {
 		
@@ -140,7 +140,7 @@ public class RuaController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de ruas",
 			summary = "Exclui uma nova rua",
-			tags = "Remoção de informações")
+			tags = "Rua - Remoção de informações")
 	@DeleteMapping(value = "/excluir/{id}")
 	public Rua excluirRua(@PathVariable Long id) {
 		

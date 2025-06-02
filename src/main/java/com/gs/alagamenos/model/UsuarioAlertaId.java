@@ -3,9 +3,11 @@ package com.gs.alagamenos.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
 
+@Schema(description = "Esta classe irá representar a entidade de junção dos ID para Alertas de Usuários")
 @Embeddable
 @Data
 public class UsuarioAlertaId implements Serializable {

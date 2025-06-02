@@ -2,6 +2,9 @@ package com.gs.alagamenos.dto;
 
 import com.gs.alagamenos.model.Cidade;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(hidden = true)
 public class BairroDTO {
 	
 	private long id;

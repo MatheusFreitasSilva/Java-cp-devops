@@ -14,7 +14,7 @@ public class AlertaMapper {
 		
 		dto.setId(alerta.getId());
 		dto.setMensagem(alerta.getMensagem());
-		dto.setData_criacao(alerta.getData_criacao());
+		dto.setData_criacao(alerta.getDataCriacao());
 		
 		return dto;
 	}

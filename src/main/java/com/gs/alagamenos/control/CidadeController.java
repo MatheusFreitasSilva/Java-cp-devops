@@ -56,7 +56,7 @@ public class CidadeController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de CidadeDTO de forma paginada", 
 			summary = "Retorna páginas de CidadeDTO",
-			tags = "Retorno de informação")
+			tags = "Cidade - Retorno de informações")
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<CidadeDTO>> retornarCidadesPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +72,7 @@ public class CidadeController {
 	// GET All
 	@Operation(description = "Retorna todas as cidades",
 			summary = "Retorna todos as cidades",
-			tags = "Retorno de informação")
+			tags = "Cidade - Retorno de informações")
 	@GetMapping(value = "/todas")
 	public List<CidadeDTO> retornaTodasCidades(){
 		
@@ -82,7 +82,7 @@ public class CidadeController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todas as cidades existentes no Cache",
 			summary = "Retorna todas as cidades utilizando Caching",
-			tags = "Retorno de informação")
+			tags = "Cidade - Retorno de informações")
 	@GetMapping(value = "/todas_cacheable")
 	public List<CidadeDTO> retonaTodasCidadesCacheable(){
 		
@@ -92,7 +92,7 @@ public class CidadeController {
 	// GET By Id
 	@Operation(description = "Retorna uma cidade com base em um ID",
 			summary = "Retorna uma cidade com base em um ID",
-			tags = "Retorno de informação")
+			tags = "Cidade - Retorno de informações")
 	@GetMapping(value = "/{id}")
 	public CidadeDTO retornaCidadePorId(@PathVariable Long id) {
 		
@@ -108,7 +108,7 @@ public class CidadeController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de cidades",
 			summary = "Inserir uma nova cidade",
-			tags = "Inserção de informações")
+			tags = "Cidade - Inserção de informações")
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Cidade> inserirCidade(@RequestBody @Valid Cidade cidade) {
 		
@@ -121,7 +121,7 @@ public class CidadeController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de cidades",
 			summary = "Atualiza uma nova cidade",
-			tags = "Inserção de informações")
+			tags = "Cidade - Inserção de informações")
 	@PutMapping(value = "/atualizar/{id}")
 	public Cidade atualizarCidade(@PathVariable Long id, @RequestBody Cidade cidade) {
 		
@@ -140,7 +140,7 @@ public class CidadeController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de cidades",
 			summary = "Exclui uma nova cidade",
-			tags = "Remoção de informações")
+			tags = "Cidade - Remoção de informações")
 	@DeleteMapping(value = "/excluir/{id}")
 	public Cidade excluirCidade(@PathVariable Long id) {
 		

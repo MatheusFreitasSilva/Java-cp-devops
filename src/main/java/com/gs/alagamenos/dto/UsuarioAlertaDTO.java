@@ -4,6 +4,9 @@ import com.gs.alagamenos.model.Alerta;
 import com.gs.alagamenos.model.Usuario;
 import com.gs.alagamenos.model.UsuarioAlertaId;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(hidden = true)
 public class UsuarioAlertaDTO {
 
 	private UsuarioAlertaId id;

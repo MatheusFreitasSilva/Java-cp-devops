@@ -12,7 +12,7 @@ public class UsuarioMapper {
 		
 		UsuarioDTO dto = new UsuarioDTO();
 		
-		dto.setData_nascimento(usuario.getDataNascimento());
+		dto.setDataNascimento(usuario.getDataNascimento());
 		dto.setEmail(usuario.getEmail());
 		dto.setId(usuario.getId());
 		dto.setNome(usuario.getNome());

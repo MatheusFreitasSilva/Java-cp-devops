@@ -56,7 +56,7 @@ public class EstadoController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de EstadoDTO de forma paginada", 
 			summary = "Retorna páginas de EstadoDTO",
-			tags = "Retorno de informação")
+			tags = "Estado - Retorno de informações")
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<EstadoDTO>> retornarEstadosPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +72,7 @@ public class EstadoController {
 	// GET All
 	@Operation(description = "Retorna todos os estados",
 			summary = "Retorna todos os estados",
-			tags = "Retorno de informação")
+			tags = "Estado - Retorno de informações")
 	@GetMapping(value = "/todas")
 	public List<EstadoDTO> retornaTodosEstados(){
 		
@@ -82,7 +82,7 @@ public class EstadoController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os estados existentes no Cache",
 			summary = "Retorna todos os estados utilizando Caching",
-			tags = "Retorno de informação")
+			tags = "Estado - Retorno de informações")
 	@GetMapping(value = "/todas_cacheable")
 	public List<EstadoDTO> retonaTodosEstadosCacheable(){
 		
@@ -92,7 +92,7 @@ public class EstadoController {
 	// GET By Id
 	@Operation(description = "Retorna um estado com base em um ID",
 			summary = "Retorna um estado com base em um ID",
-			tags = "Retorno de informação")
+			tags = "Estado - Retorno de informações")
 	@GetMapping(value = "/{id}")
 	public EstadoDTO retornaEstadoPorId(@PathVariable Long id) {
 		
@@ -108,7 +108,7 @@ public class EstadoController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de estados",
 			summary = "Inserir um novo estado",
-			tags = "Inserção de informações")
+			tags = "Estado - Inserção de informações")
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Estado> inserirEstado(@RequestBody @Valid Estado estado) {
 		
@@ -121,7 +121,7 @@ public class EstadoController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de estados",
 			summary = "Atualiza um novo estado",
-			tags = "Inserção de informações")
+			tags = "Estado - Inserção de informações")
 	@PutMapping(value = "/atualizar/{id}")
 	public Estado atualizarEstado(@PathVariable Long id, @RequestBody Estado estado) {
 		
@@ -140,7 +140,7 @@ public class EstadoController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de estados",
 			summary = "Exclui um novo estado",
-			tags = "Remoção de informações")
+			tags = "Estado - Remoção de informações")
 	@DeleteMapping(value = "/excluir/{id}")
 	public Estado excluirEstado(@PathVariable Long id) {
 		

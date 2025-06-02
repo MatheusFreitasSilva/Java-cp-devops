@@ -1,7 +1,12 @@
 package com.gs.alagamenos.dto;
 
-import java.time.LocalDate;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(hidden = true)
 public class UsuarioDTO {
 
 	private long id;
@@ -9,18 +14,20 @@ public class UsuarioDTO {
 	private String email;
 	private String senha;
 	private long telefone;
-	private LocalDate data_nascimento;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date dataNascimento;
 	
 	public UsuarioDTO() {}
 
-	public UsuarioDTO(long id, String nome, String email, String senha, long telefone, LocalDate data_nascimento) {
+	public UsuarioDTO(long id, String nome, String email, String senha, long telefone, Date data_nascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = data_nascimento;
 	}
 
 	public long getId() {
@@ -63,11 +70,11 @@ public class UsuarioDTO {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getData_nascimento() {
-		return data_nascimento;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData_nascimento(LocalDate data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setDataNascimento(Date data_nascimento) {
+		this.dataNascimento = data_nascimento;
 	}
 }
