@@ -1,9 +1,8 @@
 package com.gs.alagamenos.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -29,7 +28,7 @@ public class Alerta {
 	
 	@Schema(description = "Este atributo representa a data de criação de um alerta")
 	@NotNull(message = "Não é permitido a inserção de alerta sem data de criação")
-	private LocalDate dataCriacao;
+	private Date dataCriacao;
 	
 	@ManyToOne
 	@JoinColumn(name= "RUA_ID", nullable = false)

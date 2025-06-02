@@ -1,24 +1,27 @@
 package com.gs.alagamenos.dto;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gs.alagamenos.model.Rua;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 
 @Schema(hidden = true)
 public class AlertaDTO {
 	
 	private long id;
 	private String mensagem;
-	private LocalDate dataCriacao;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
 	private Rua rua;
 
 	public AlertaDTO() {}
 
-	public AlertaDTO(long id, String mensagem, LocalDate data_criacao, Rua rua) {
+	public AlertaDTO(long id, String mensagem, Date data_criacao, Rua rua) {
 		super();
 		this.id = id;
 		this.mensagem = mensagem;
@@ -42,11 +45,11 @@ public class AlertaDTO {
 		this.mensagem = mensagem;
 	}
 
-	public LocalDate getData_criacao() {
+	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setData_criacao(LocalDate data_criacao) {
+	public void setDataCriacao(Date data_criacao) {
 		this.dataCriacao = data_criacao;
 	}
 
