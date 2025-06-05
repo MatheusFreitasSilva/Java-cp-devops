@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.EstadoCachingService;
 import com.gs.alagamenos.service.EstadoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/estados")
 public class EstadoController {
@@ -56,7 +58,7 @@ public class EstadoController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de EstadoDTO de forma paginada", 
 			summary = "Retorna páginas de EstadoDTO",
-			tags = "Estado - Retorno de informações")
+			tags = {"Estado"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<EstadoDTO>> retornarEstadosPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class EstadoController {
 	// GET All
 	@Operation(description = "Retorna todos os estados",
 			summary = "Retorna todos os estados",
-			tags = "Estado - Retorno de informações")
+			tags = {"Estado"})
 	@GetMapping(value = "/todas")
 	public List<EstadoDTO> retornaTodosEstados(){
 		
@@ -82,7 +84,7 @@ public class EstadoController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os estados existentes no Cache",
 			summary = "Retorna todos os estados utilizando Caching",
-			tags = "Estado - Retorno de informações")
+			tags = {"Estado"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<EstadoDTO> retonaTodosEstadosCacheable(){
 		
@@ -92,7 +94,7 @@ public class EstadoController {
 	// GET By Id
 	@Operation(description = "Retorna um estado com base em um ID",
 			summary = "Retorna um estado com base em um ID",
-			tags = "Estado - Retorno de informações")
+			tags = {"Estado"})
 	@GetMapping(value = "/{id}")
 	public EstadoDTO retornaEstadoPorId(@PathVariable Long id) {
 		
@@ -108,7 +110,7 @@ public class EstadoController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de estados",
 			summary = "Inserir um novo estado",
-			tags = "Estado - Inserção de informações")
+			tags = {"Estado"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Estado> inserirEstado(@RequestBody @Valid Estado estado) {
 		
@@ -121,7 +123,7 @@ public class EstadoController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de estados",
 			summary = "Atualiza um novo estado",
-			tags = "Estado - Inserção de informações")
+			tags = {"Estado"})
 	@PutMapping(value = "/atualizar/{id}")
 	public Estado atualizarEstado(@PathVariable Long id, @RequestBody Estado estado) {
 		
@@ -140,7 +142,7 @@ public class EstadoController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de estados",
 			summary = "Exclui um novo estado",
-			tags = "Estado - Remoção de informações")
+			tags = {"Estado"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public Estado excluirEstado(@PathVariable Long id) {
 		

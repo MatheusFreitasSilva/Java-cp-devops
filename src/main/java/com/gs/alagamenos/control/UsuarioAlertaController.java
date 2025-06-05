@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.UsuarioAlertaCachingService;
 import com.gs.alagamenos.service.UsuarioAlertaService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/alertas_usuarios")
 public class UsuarioAlertaController {
@@ -56,7 +58,7 @@ public class UsuarioAlertaController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de UsuariAlertaoDTO de forma paginada", 
 			summary = "Retorna páginas de UsuarioAlertaDTO",
-			tags = "Alertas de usuário - Retorno de informações")
+			tags = {"Alertas de usuário"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<UsuarioAlertaDTO>> retornarUsuariosAlertasPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class UsuarioAlertaController {
 	// GET All
 	@Operation(description = "Retorna todos os alertas de usuarios",
 			summary = "Retorna todos os alertas de usuarios",
-			tags = "Alertas de usuário - Retorno de informações")
+			tags = {"Alertas de usuário"})
 	@GetMapping(value = "/todas")
 	public List<UsuarioAlertaDTO> retornaTodosUsuariosAlertas(){
 		
@@ -82,7 +84,7 @@ public class UsuarioAlertaController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os usuarios existentes no Cache",
 			summary = "Retorna todos os usuarios utilizando Caching",
-			tags = "Alertas de usuário - Retorno de informações")
+			tags = {"Alertas de usuário"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<UsuarioAlertaDTO> retonaTodosUsuariosCacheable(){
 		
@@ -92,7 +94,7 @@ public class UsuarioAlertaController {
 	// GET By Id
 	@Operation(description = "Retorna um alerta de usuario com base no ID de um usuário e no ID de um Alerta",
 			summary = "Retorna um alerta de usuario com base em um ID composto (Id de Usuario e Id de alerta)",
-			tags = "Alertas de usuário - Retorno de informações")
+			tags = {"Alertas de usuário"})
 	@GetMapping(value = "/{usuarioiId}/{alertaId}")
 	public UsuarioAlertaDTO retornaUsuarioPorId(@PathVariable Long usuarioId, @PathVariable Long alertaId) {
 		
@@ -110,7 +112,7 @@ public class UsuarioAlertaController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de alerta de usuarios",
 			summary = "Inserir um novo alerta de usuario",
-			tags = "Alertas de usuário - Inserção de informações")
+			tags = {"Alertas de usuário"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<UsuarioAlerta> inserirUsuarioAlerta(@RequestBody @Valid UsuarioAlerta usuarioAlerta) {
 		
@@ -123,7 +125,7 @@ public class UsuarioAlertaController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de usuarios",
 			summary = "Exclui um novo usuario",
-			tags = "Alertas de usuário - Remoção de informações")
+			tags = {"Alertas de usuário"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public UsuarioAlerta excluirAlertaUsuario(@PathVariable Long usuarioId, @PathVariable Long alertaId) {
 		

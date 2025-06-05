@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.BairroCachingService;
 import com.gs.alagamenos.service.BairroService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/bairros")
 public class BairroController {
@@ -56,7 +58,7 @@ public class BairroController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de BairroDTO de forma paginada", 
 			summary = "Retorna páginas de BairroDTO",
-			tags = "Bairro - Retorno de informações")
+			tags = {"Bairro"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<BairroDTO>> retornarBairrosPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class BairroController {
 	// GET All
 	@Operation(description = "Retorna todos os bairros",
 			summary = "Retorna todos os bairros",
-			tags = "Bairro - Retorno de informações")
+			tags = {"Bairro"})
 	@GetMapping(value = "/todas")
 	public List<BairroDTO> retornaTodosBairros(){
 		
@@ -82,7 +84,7 @@ public class BairroController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os bairros existentes no Cache",
 			summary = "Retorna todos os bairros utilizando Caching",
-			tags = "Bairro - Retorno de informações")
+			tags = {"Bairro"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<BairroDTO> retonaTodosBairrosCacheable(){
 		
@@ -92,7 +94,7 @@ public class BairroController {
 	// GET By Id
 	@Operation(description = "Retorna um bairro com base em um ID",
 			summary = "Retorna um bairro com base em um ID",
-			tags = "Bairro - Retorno de informações")
+			tags = {"Bairro"})
 	@GetMapping(value = "/{id}")
 	public BairroDTO retornaBairroPorId(@PathVariable Long id) {
 		
@@ -108,7 +110,7 @@ public class BairroController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de bairros",
 			summary = "Inserir um novo bairro",
-			tags = "Bairro - Inserção de informações")
+			tags = {"Bairro"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Bairro> inserirBairro(@RequestBody @Valid Bairro bairro) {
 		
@@ -121,7 +123,7 @@ public class BairroController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de bairros",
 			summary = "Atualiza um novo bairro",
-			tags = "Bairro - Inserção de informações")
+			tags = {"Bairro"})
 	@PutMapping(value = "/atualizar/{id}")
 	public Bairro atualizarBairro(@PathVariable Long id, @RequestBody Bairro bairro) {
 		
@@ -140,7 +142,7 @@ public class BairroController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de bairros",
 			summary = "Exclui um novo bairro",
-			tags = "Bairro - Remoção de informações")
+			tags = {"Bairro"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public Bairro excluirBairro(@PathVariable Long id) {
 		

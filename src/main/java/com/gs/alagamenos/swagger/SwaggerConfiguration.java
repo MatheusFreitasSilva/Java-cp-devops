@@ -3,11 +3,25 @@ package com.gs.alagamenos.swagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
+import io.swagger.v3.oas.models.tags.Tag;
+
+import java.util.List;
+
 @Configuration
+@SecurityScheme(
+    name = "bearerAuth",
+    type = SecuritySchemeType.HTTP,
+    scheme = "bearer",
+    bearerFormat = "JWT"
+)
+@SecurityRequirement(name = "bearerAuth")
 public class SwaggerConfiguration {
 	@Bean
 	OpenAPI configurarSwagger() {
@@ -24,5 +38,5 @@ public class SwaggerConfiguration {
 											.license(new License().url("https://github.com/GS-2025-1/Java.git")
 																  .name("Alagamenos")));
 	}
-
+	
 }

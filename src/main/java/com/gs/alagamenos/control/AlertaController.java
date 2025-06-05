@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.AlertaCachingService;
 import com.gs.alagamenos.service.AlertaService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/alertas")
 public class AlertaController {
@@ -56,7 +58,7 @@ public class AlertaController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de AlertaDTO de forma paginada", 
 			summary = "Retorna páginas de AlertaDTO",
-			tags = "Alerta - Retorno de informações")
+			tags = {"Alerta"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<AlertaDTO>> retornarAlertasPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class AlertaController {
 	// GET All
 	@Operation(description = "Retorna todos os alertas",
 			summary = "Retorna todos os alertas",
-			tags = "Alerta - Retorno de informações")
+			tags = {"Alerta"})
 	@GetMapping(value = "/todas")
 	public List<AlertaDTO> retornaTodosAlertas(){
 		
@@ -82,7 +84,7 @@ public class AlertaController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os alertas existentes no Cache",
 			summary = "Retorna todos os alertas utilizando Caching",
-			tags = "Alerta - Retorno de informações")
+			tags = {"Alerta"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<AlertaDTO> retonaTodosAlertasCacheable(){
 		
@@ -92,7 +94,7 @@ public class AlertaController {
 	// GET By Id
 	@Operation(description = "Retorna um alerta com base em um ID",
 			summary = "Retorna um alerta com base em um ID",
-			tags = "Alerta - Retorno de informações")
+			tags = {"Alerta"})
 	@GetMapping(value = "/{id}")
 	public AlertaDTO retornaAlertaPorId(@PathVariable Long id) {
 		
@@ -108,7 +110,7 @@ public class AlertaController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de alertas",
 			summary = "Inserir um novo alerta",
-			tags = "Alerta - Inserção de informações")
+			tags = {"Alerta"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Alerta> inserirAlerta(@RequestBody @Valid Alerta alerta) {
 		
@@ -121,7 +123,7 @@ public class AlertaController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de alertas",
 			summary = "Atualiza um novo alerta",
-			tags = "Alerta - Inserção de informações")
+			tags = {"Alerta"})
 	@PutMapping(value = "/atualizar/{id}")
 	public Alerta atualizarAlerta(@PathVariable Long id, @RequestBody Alerta alerta) {
 		
@@ -142,7 +144,7 @@ public class AlertaController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de alertas",
 			summary = "Exclui um novo alerta",
-			tags = "Alerta - Remoção de informações")
+			tags = {"Alerta"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public Alerta excluirAlerta(@PathVariable Long id) {
 		

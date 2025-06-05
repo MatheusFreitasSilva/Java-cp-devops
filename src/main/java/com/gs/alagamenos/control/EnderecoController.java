@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.EnderecoCachingService;
 import com.gs.alagamenos.service.EnderecoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/enderecos")
 public class EnderecoController {
@@ -56,7 +58,7 @@ public class EnderecoController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de EnderecoDTO de forma paginada", 
 			summary = "Retorna páginas de EnderecoDTO",
-			tags = "Endereço - Retorno de informações")
+			tags = {"Endereço"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<EnderecoDTO>> retornarEnderecosPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class EnderecoController {
 	// GET All
 	@Operation(description = "Retorna todos os enderecos",
 			summary = "Retorna todos os enderecos",
-			tags = "Endereço - Retorno de informações")
+			tags = {"Endereço"})
 	@GetMapping(value = "/todas")
 	public List<EnderecoDTO> retornaTodosEnderecos(){
 		
@@ -82,7 +84,7 @@ public class EnderecoController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todos os enderecos existentes no Cache",
 			summary = "Retorna todos os enderecos utilizando Caching",
-			tags = "Endereço - Retorno de informações")
+			tags = {"Endereço"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<EnderecoDTO> retonaTodosEnderecosCacheable(){
 		
@@ -92,7 +94,7 @@ public class EnderecoController {
 	// GET By Id
 	@Operation(description = "Retorna um endereco com base em um ID",
 			summary = "Retorna um endereco com base em um ID",
-			tags = "Endereço - Retorno de informações")
+			tags = {"Endereço"})
 	@GetMapping(value = "/{id}")
 	public EnderecoDTO retornaEnderecoPorId(@PathVariable Long id) {
 		
@@ -108,7 +110,7 @@ public class EnderecoController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de enderecos",
 			summary = "Inserir um novo endereco",
-			tags = "Endereço - Inserção de informações")
+			tags = {"Endereço"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Endereco> inserirEndereco(@RequestBody @Valid Endereco endereco) {
 		
@@ -121,7 +123,7 @@ public class EnderecoController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de enderecos",
 			summary = "Atualiza um novo endereco",
-			tags = "Endereço - Inserção de informações")
+			tags = {"Endereço"})
 	@PutMapping(value = "/atualizar/{id}")
 	public Endereco atualizarEndereco(@PathVariable Long id, @RequestBody Endereco endereco) {
 		
@@ -143,7 +145,7 @@ public class EnderecoController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de enderecos",
 			summary = "Exclui um novo endereco",
-			tags = "Endereço - Remoção de informações")
+			tags = {"Endereço"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public Endereco excluirEndereco(@PathVariable Long id) {
 		

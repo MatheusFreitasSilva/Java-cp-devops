@@ -30,6 +30,11 @@ public class UsuarioCachingService {
 		return repU.findById(id);
 	}
 	
+	@Cacheable(value = "buscaUsuarioPorEmail")
+	public Optional<Usuario> findByEmail(String email) {
+		return repU.findByEmail(email);
+	}
+	
 	@Cacheable(value = "buscaUsuarioPaginado")
 	public Page<Usuario> findAll(PageRequest req){
 		return repU.findAll(req);

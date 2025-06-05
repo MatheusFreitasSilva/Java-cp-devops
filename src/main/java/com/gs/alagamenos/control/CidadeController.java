@@ -29,8 +29,10 @@ import com.gs.alagamenos.service.CidadeCachingService;
 import com.gs.alagamenos.service.CidadeService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping(value = "/cidades")
 public class CidadeController {
@@ -56,7 +58,7 @@ public class CidadeController {
 	// GET All paginado
 	@Operation(description = "Retorna lista de CidadeDTO de forma paginada", 
 			summary = "Retorna páginas de CidadeDTO",
-			tags = "Cidade - Retorno de informações")
+			tags = {"Cidade"})
 	@GetMapping(value = "/paginadas")
 	public ResponseEntity<Page<CidadeDTO>> retornarCidadesPaginados(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -72,7 +74,7 @@ public class CidadeController {
 	// GET All
 	@Operation(description = "Retorna todas as cidades",
 			summary = "Retorna todos as cidades",
-			tags = "Cidade - Retorno de informações")
+			tags = {"Cidade"})
 	@GetMapping(value = "/todas")
 	public List<CidadeDTO> retornaTodasCidades(){
 		
@@ -82,7 +84,7 @@ public class CidadeController {
 	// GET all Cacheable
 	@Operation(description = "Retorna todas as cidades existentes no Cache",
 			summary = "Retorna todas as cidades utilizando Caching",
-			tags = "Cidade - Retorno de informações")
+			tags = {"Cidade"})
 	@GetMapping(value = "/todas_cacheable")
 	public List<CidadeDTO> retonaTodasCidadesCacheable(){
 		
@@ -92,7 +94,7 @@ public class CidadeController {
 	// GET By Id
 	@Operation(description = "Retorna uma cidade com base em um ID",
 			summary = "Retorna uma cidade com base em um ID",
-			tags = "Cidade - Retorno de informações")
+			tags = {"Cidade"})
 	@GetMapping(value = "/{id}")
 	public CidadeDTO retornaCidadePorId(@PathVariable Long id) {
 		
@@ -108,7 +110,7 @@ public class CidadeController {
 	// POST
 	@Operation(description = "Esta operação possibilita a inserção de um novo item na tabela de cidades",
 			summary = "Inserir uma nova cidade",
-			tags = "Cidade - Inserção de informações")
+			tags = {"Cidade"})
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Cidade> inserirCidade(@RequestBody @Valid Cidade cidade) {
 		
@@ -121,7 +123,7 @@ public class CidadeController {
 	// PUT
 	@Operation(description = "Esta operação possibilita a atualização de um item na tabela de cidades",
 			summary = "Atualiza uma nova cidade",
-			tags = "Cidade - Inserção de informações")
+			tags = {"Cidade"})
 	@PutMapping(value = "/atualizar/{id}")
 	public Cidade atualizarCidade(@PathVariable Long id, @RequestBody Cidade cidade) {
 		
@@ -140,7 +142,7 @@ public class CidadeController {
 	// DELETE
 	@Operation(description = "Esta operação possibilita a exclusão de um item na tabela de cidades",
 			summary = "Exclui uma nova cidade",
-			tags = "Cidade - Remoção de informações")
+			tags = {"Cidade"})
 	@DeleteMapping(value = "/excluir/{id}")
 	public Cidade excluirCidade(@PathVariable Long id) {
 		
