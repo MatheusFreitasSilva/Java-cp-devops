@@ -132,6 +132,9 @@ public class BairroController {
 		if(op.isPresent()) {
 			Bairro bairro_antigo = op.get();
 			bairro_antigo.setNome_bairro(bairro.getNome_bairro());
+			
+			repB.save(bairro_antigo);
+			cacheB.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

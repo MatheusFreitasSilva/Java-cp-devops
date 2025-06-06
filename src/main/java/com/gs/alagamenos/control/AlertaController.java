@@ -134,6 +134,9 @@ public class AlertaController {
 			alerta_antigo.setMensagem(alerta.getMensagem());
 			alerta_antigo.setDataCriacao(alerta.getDataCriacao());
 			alerta_antigo.setRua(alerta.getRua());
+			
+			repA.save(alerta_antigo);
+			cacheA.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

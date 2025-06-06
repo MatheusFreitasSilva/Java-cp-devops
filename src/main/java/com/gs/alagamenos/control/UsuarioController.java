@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository repU;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UsuarioService servU;
@@ -131,6 +135,9 @@ public class UsuarioController {
 	@PostMapping(value = "/inserir")
 	public ResponseEntity<Usuario> inserirUsuario(@RequestBody @Valid Usuario usuario) {
 		
+		String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaCriptografada);
+		
 		repU.save(usuario);
 		cacheU.limparCache();
 				
@@ -152,7 +159,15 @@ public class UsuarioController {
 			usuario_antigo.setDataNascimento(usuario.getDataNascimento());
 			usuario_antigo.setEmail(usuario.getEmail());
 			usuario_antigo.setTelefone(usuario.getTelefone());
-			usuario_antigo.setSenha(usuario.getSenha());
+			
+			if (usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
+	            String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+	            usuario_antigo.setSenha(senhaCriptografada);
+	        }
+			
+			repU.save(usuario_antigo); 
+	        cacheU.limparCache();
+	        
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

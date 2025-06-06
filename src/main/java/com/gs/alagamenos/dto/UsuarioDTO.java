@@ -12,7 +12,6 @@ public class UsuarioDTO {
 	private long id;
 	private String nome;
 	private String email;
-	private String senha;
 	private long telefone;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -20,12 +19,11 @@ public class UsuarioDTO {
 	
 	public UsuarioDTO() {}
 
-	public UsuarioDTO(long id, String nome, String email, String senha, long telefone, Date data_nascimento) {
+	public UsuarioDTO(long id, String nome, String email, long telefone, Date data_nascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.senha = senha;
 		this.telefone = telefone;
 		this.dataNascimento = data_nascimento;
 	}
@@ -52,14 +50,6 @@ public class UsuarioDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public long getTelefone() {

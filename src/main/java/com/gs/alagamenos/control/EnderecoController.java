@@ -135,6 +135,9 @@ public class EnderecoController {
 			endereco_antigo.setNumero_endereco(endereco.getNumero_endereco());
 			endereco_antigo.setRua(endereco.getRua());
 			endereco_antigo.setUsuario(endereco.getUsuario());
+			
+			repE.save(endereco_antigo);
+			cacheE.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

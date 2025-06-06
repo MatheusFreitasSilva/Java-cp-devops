@@ -132,6 +132,9 @@ public class CidadeController {
 		if(op.isPresent()) {
 			Cidade cidade_antiga = op.get();
 			cidade_antiga.setNome_cidade(cidade.getNome_cidade());
+			
+			repC.save(cidade_antiga);
+			cacheC.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

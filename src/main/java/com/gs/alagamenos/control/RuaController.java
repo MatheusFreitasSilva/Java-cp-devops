@@ -132,6 +132,9 @@ public class RuaController {
 		if(op.isPresent()) {
 			Rua rua_antiga = op.get();
 			rua_antiga.setNome_rua(rua.getNome_rua());
+			
+			repR.save(rua_antiga);
+			cacheR.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

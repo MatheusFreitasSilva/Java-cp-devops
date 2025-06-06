@@ -132,6 +132,9 @@ public class EstadoController {
 		if(op.isPresent()) {
 			Estado estado_antigo = op.get();
 			estado_antigo.setNome_estado(estado.getNome_estado());
+			
+			repE.save(estado_antigo);
+			cacheE.limparCache();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

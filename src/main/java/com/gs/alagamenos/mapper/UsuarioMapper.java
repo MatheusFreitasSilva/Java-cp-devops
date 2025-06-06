@@ -16,7 +16,6 @@ public class UsuarioMapper {
 		dto.setEmail(usuario.getEmail());
 		dto.setId(usuario.getId());
 		dto.setNome(usuario.getNome());
-		dto.setSenha(usuario.getSenha());
 		dto.setTelefone(usuario.getTelefone());
 		
 		return dto;
