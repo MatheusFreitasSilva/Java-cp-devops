@@ -22,9 +22,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gs.alagamenos.AlagamenosApplication;
 import com.gs.alagamenos.dto.CidadeDTO;
+import com.gs.alagamenos.dto.CidadeEnvioDTO;
 import com.gs.alagamenos.mapper.CidadeMapperInterface;
 import com.gs.alagamenos.model.Cidade;
+import com.gs.alagamenos.model.Estado;
 import com.gs.alagamenos.repository.CidadeRepository;
+import com.gs.alagamenos.repository.EstadoRepository;
 import com.gs.alagamenos.service.CidadeCachingService;
 import com.gs.alagamenos.service.CidadeService;
 
@@ -41,6 +44,9 @@ public class CidadeController {
 	
 	@Autowired
 	private CidadeRepository repC;
+	
+	@Autowired
+	private EstadoRepository repE;
 	
 	@Autowired
 	private CidadeService servC;
@@ -112,7 +118,15 @@ public class CidadeController {
 			summary = "Inserir uma nova cidade",
 			tags = {"Cidade"})
 	@PostMapping(value = "/inserir")
-	public ResponseEntity<Cidade> inserirCidade(@RequestBody @Valid Cidade cidade) {
+	public ResponseEntity<Cidade> inserirCidade(@RequestBody @Valid CidadeEnvioDTO dto) {
+		
+		Estado estado = repE.findById(dto.getEstado_id())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estado não encontrado"));
+		
+		Cidade cidade = new Cidade();
+		
+		cidade.setNome_cidade(dto.getNome_cidade());
+		cidade.setEstado(estado);
 		
 		repC.save(cidade);
 		cacheC.limparCache();
@@ -125,21 +139,28 @@ public class CidadeController {
 			summary = "Atualiza uma nova cidade",
 			tags = {"Cidade"})
 	@PutMapping(value = "/atualizar/{id}")
-	public Cidade atualizarCidade(@PathVariable Long id, @RequestBody Cidade cidade) {
+	public ResponseEntity<Cidade> atualizarCidade(@PathVariable Long id, @RequestBody CidadeEnvioDTO dto) {
 		
 		Optional<Cidade> op = cacheC.findById(id);
 		
 		if(op.isPresent()) {
 			Cidade cidade_antiga = op.get();
-			cidade_antiga.setNome_cidade(cidade.getNome_cidade());
+			if (dto.getNome_cidade() != null) {
+				cidade_antiga.setNome_cidade(dto.getNome_cidade());
+			}
+			if (dto.getEstado_id() != null) {
+				Estado estado= repE.findById(dto.getEstado_id())
+	                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estado não encontrado"));
+				cidade_antiga.setEstado(estado);
+			}
 			
 			repC.save(cidade_antiga);
 			cacheC.limparCache();
+			
+			return ResponseEntity.ok(cidade_antiga);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		return cidade;
 	}
 	
 	// DELETE

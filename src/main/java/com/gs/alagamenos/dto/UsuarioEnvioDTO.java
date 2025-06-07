@@ -1,7 +1,6 @@
 package com.gs.alagamenos.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -10,33 +9,25 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Schema(hidden = true)
-public class UsuarioDTO {
-
-	private long id;
+public class UsuarioEnvioDTO {
+	
 	private String nome;
 	private String email;
-	private long telefone;
+	private Long telefone;
+	private String senha;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate dataNascimento;
 	
-	public UsuarioDTO() {}
+	public UsuarioEnvioDTO() {}
 
-	public UsuarioDTO(long id, String nome, String email, long telefone, LocalDate data_nascimento) {
+	public UsuarioEnvioDTO(String nome, String email, Long telefone, String senha, LocalDate dataNascimento) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.dataNascimento = data_nascimento;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+		this.senha = senha;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getNome() {
@@ -55,19 +46,30 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
-	public long getTelefone() {
+	public Long getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(long telefone) {
+	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate data_nascimento) {
-		this.dataNascimento = data_nascimento;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
+	
+	
+
 }

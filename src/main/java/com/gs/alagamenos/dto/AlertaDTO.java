@@ -14,7 +14,7 @@ public class AlertaDTO {
 	private long id;
 	private String mensagem;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
 	private Rua rua;

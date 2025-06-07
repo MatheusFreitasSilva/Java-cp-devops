@@ -22,9 +22,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gs.alagamenos.AlagamenosApplication;
 import com.gs.alagamenos.dto.BairroDTO;
+import com.gs.alagamenos.dto.BairroEnvioDTO;
 import com.gs.alagamenos.mapper.BairroMapperInterface;
 import com.gs.alagamenos.model.Bairro;
+import com.gs.alagamenos.model.Cidade;
+import com.gs.alagamenos.model.Rua;
 import com.gs.alagamenos.repository.BairroRepository;
+import com.gs.alagamenos.repository.CidadeRepository;
 import com.gs.alagamenos.service.BairroCachingService;
 import com.gs.alagamenos.service.BairroService;
 
@@ -41,6 +45,9 @@ public class BairroController {
 	
 	@Autowired
 	private BairroRepository repB;
+	
+	@Autowired
+	private CidadeRepository repC;
 	
 	@Autowired
 	private BairroService servB;
@@ -112,7 +119,15 @@ public class BairroController {
 			summary = "Inserir um novo bairro",
 			tags = {"Bairro"})
 	@PostMapping(value = "/inserir")
-	public ResponseEntity<Bairro> inserirBairro(@RequestBody @Valid Bairro bairro) {
+	public ResponseEntity<Bairro> inserirBairro(@RequestBody @Valid BairroEnvioDTO dto) {
+		
+		Cidade cidade = repC.findById(dto.getCidade_id())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cidade não encontrada"));
+		
+		Bairro bairro = new Bairro();
+		
+		bairro.setNome_bairro(dto.getNome_bairro());
+		bairro.setCidade(cidade);		
 		
 		repB.save(bairro);
 		cacheB.limparCache();
@@ -125,21 +140,29 @@ public class BairroController {
 			summary = "Atualiza um novo bairro",
 			tags = {"Bairro"})
 	@PutMapping(value = "/atualizar/{id}")
-	public Bairro atualizarBairro(@PathVariable Long id, @RequestBody Bairro bairro) {
+	public ResponseEntity<Bairro> atualizarBairro(@PathVariable Long id, @RequestBody BairroEnvioDTO dto) {
 		
 		Optional<Bairro> op = cacheB.findById(id);
 		
 		if(op.isPresent()) {
 			Bairro bairro_antigo = op.get();
-			bairro_antigo.setNome_bairro(bairro.getNome_bairro());
+			
+			if (dto.getNome_bairro() != null) {
+				bairro_antigo.setNome_bairro(dto.getNome_bairro());
+			}
+			if (dto.getCidade_id() != null) {
+				Cidade cidade = repC.findById(dto.getCidade_id())
+	                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cidade não encontrada"));
+				bairro_antigo.setCidade(cidade);
+			}
 			
 			repB.save(bairro_antigo);
 			cacheB.limparCache();
+			
+			return ResponseEntity.ok(bairro_antigo);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		return bairro;
 	}
 	
 	// DELETE

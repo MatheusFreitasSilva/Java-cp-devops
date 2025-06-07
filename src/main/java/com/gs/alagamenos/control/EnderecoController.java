@@ -21,10 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.gs.alagamenos.AlagamenosApplication;
+import com.gs.alagamenos.dto.EnderecoAtualizacaoDTO;
 import com.gs.alagamenos.dto.EnderecoDTO;
+import com.gs.alagamenos.dto.EnderecoEnvioDTO;
 import com.gs.alagamenos.mapper.EnderecoMapperInterface;
+import com.gs.alagamenos.model.Bairro;
 import com.gs.alagamenos.model.Endereco;
+import com.gs.alagamenos.model.Rua;
+import com.gs.alagamenos.model.Usuario;
 import com.gs.alagamenos.repository.EnderecoRepository;
+import com.gs.alagamenos.repository.RuaRepository;
+import com.gs.alagamenos.repository.UsuarioRepository;
 import com.gs.alagamenos.service.EnderecoCachingService;
 import com.gs.alagamenos.service.EnderecoService;
 
@@ -41,6 +48,12 @@ public class EnderecoController {
 	
 	@Autowired
 	private EnderecoRepository repE;
+	
+	@Autowired
+	private UsuarioRepository repU;
+	
+	@Autowired
+	private RuaRepository repR;
 	
 	@Autowired
 	private EnderecoService servE;
@@ -112,7 +125,19 @@ public class EnderecoController {
 			summary = "Inserir um novo endereco",
 			tags = {"Endereço"})
 	@PostMapping(value = "/inserir")
-	public ResponseEntity<Endereco> inserirEndereco(@RequestBody @Valid Endereco endereco) {
+	public ResponseEntity<Endereco> inserirEndereco(@RequestBody @Valid EnderecoEnvioDTO dto) {
+		
+		Rua rua = repR.findById(dto.getRua_id())
+	            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rua não encontrada"));
+		
+		Usuario usuario = repU.findById(dto.getUsuario_id())
+	            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario não encontrado"));
+	
+		Endereco endereco = new Endereco();
+		endereco.setComplemento(dto.getComplemento());
+		endereco.setNumero_endereco(dto.getNumero_endereco());
+		endereco.setRua(rua);
+		endereco.setUsuario(usuario);
 		
 		repE.save(endereco);
 		cacheE.limparCache();
@@ -125,24 +150,30 @@ public class EnderecoController {
 			summary = "Atualiza um novo endereco",
 			tags = {"Endereço"})
 	@PutMapping(value = "/atualizar/{id}")
-	public Endereco atualizarEndereco(@PathVariable Long id, @RequestBody Endereco endereco) {
+	public ResponseEntity<Endereco> atualizarEndereco(@PathVariable Long id, @RequestBody EnderecoAtualizacaoDTO dto) {
 		
 		Optional<Endereco> op = cacheE.findById(id);
 		
 		if(op.isPresent()) {
 			Endereco endereco_antigo = op.get();
-			endereco_antigo.setComplemento(endereco.getComplemento());
-			endereco_antigo.setNumero_endereco(endereco.getNumero_endereco());
-			endereco_antigo.setRua(endereco.getRua());
-			endereco_antigo.setUsuario(endereco.getUsuario());
+			if (dto.getComplemento() != null) {
+				endereco_antigo.setComplemento(dto.getComplemento());
+			}
+			if (dto.getNumero_endereco() != null) {
+				endereco_antigo.setNumero_endereco(dto.getNumero_endereco());
+			}
+			if (dto.getRua_id() != null) {
+				Rua rua= repR.findById(dto.getRua_id())
+	                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rua não encontrada"));
+				endereco_antigo.setRua(rua);
+			}
 			
 			repE.save(endereco_antigo);
 			cacheE.limparCache();
+			return ResponseEntity.ok(endereco_antigo);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		return endereco;
 	}
 	
 	// DELETE

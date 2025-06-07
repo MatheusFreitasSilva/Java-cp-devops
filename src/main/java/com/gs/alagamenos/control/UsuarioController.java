@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gs.alagamenos.AlagamenosApplication;
 import com.gs.alagamenos.dto.UsuarioDTO;
+import com.gs.alagamenos.dto.UsuarioEnvioDTO;
 import com.gs.alagamenos.mapper.UsuarioMapperInterface;
 import com.gs.alagamenos.model.Usuario;
 import com.gs.alagamenos.repository.UsuarioRepository;
@@ -133,10 +134,15 @@ public class UsuarioController {
 			summary = "Inserir um novo usuario",
 			tags = {"Usuário"})
 	@PostMapping(value = "/inserir")
-	public ResponseEntity<Usuario> inserirUsuario(@RequestBody @Valid Usuario usuario) {
+	public ResponseEntity<Usuario> inserirUsuario(@RequestBody @Valid UsuarioEnvioDTO dto) {
 		
-		String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
-		usuario.setSenha(senhaCriptografada);
+		Usuario usuario = new Usuario();	
+		
+		usuario.setNome(dto.getNome());
+	    usuario.setEmail(dto.getEmail());
+	    usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+	    usuario.setTelefone(dto.getTelefone());
+	    usuario.setDataNascimento(dto.getDataNascimento());	
 		
 		repU.save(usuario);
 		cacheU.limparCache();
@@ -149,18 +155,19 @@ public class UsuarioController {
 			summary = "Atualiza um novo usuario",
 			tags = {"Usuário"})
 	@PutMapping(value = "/atualizar/{id}")
-	public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+	public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioEnvioDTO usuario) {
 		
 		Optional<Usuario> op = cacheU.findById(id);
 		
 		if(op.isPresent()) {
 			Usuario usuario_antigo = op.get();
-			usuario_antigo.setNome(usuario.getNome());
-			usuario_antigo.setDataNascimento(usuario.getDataNascimento());
-			usuario_antigo.setEmail(usuario.getEmail());
-			usuario_antigo.setTelefone(usuario.getTelefone());
 			
-			if (usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
+			if(usuario.getNome() != null) usuario_antigo.setNome(usuario.getNome());
+			if(usuario.getDataNascimento() != null) usuario_antigo.setDataNascimento(usuario.getDataNascimento());
+			if(usuario.getEmail() != null) usuario_antigo.setEmail(usuario.getEmail());
+			if(usuario.getTelefone() != null) usuario_antigo.setTelefone(usuario.getTelefone());
+			
+			if (usuario.getSenha() != null) {
 	            String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
 	            usuario_antigo.setSenha(senhaCriptografada);
 	        }
@@ -168,11 +175,11 @@ public class UsuarioController {
 			repU.save(usuario_antigo); 
 	        cacheU.limparCache();
 	        
+	        return usuario_antigo;
+	        
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		return usuario;
 	}
 	
 	// DELETE

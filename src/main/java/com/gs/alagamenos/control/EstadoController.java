@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gs.alagamenos.AlagamenosApplication;
 import com.gs.alagamenos.dto.EstadoDTO;
+import com.gs.alagamenos.dto.EstadoEnvioDTO;
 import com.gs.alagamenos.mapper.EstadoMapperInterface;
 import com.gs.alagamenos.model.Estado;
 import com.gs.alagamenos.repository.EstadoRepository;
@@ -112,7 +113,10 @@ public class EstadoController {
 			summary = "Inserir um novo estado",
 			tags = {"Estado"})
 	@PostMapping(value = "/inserir")
-	public ResponseEntity<Estado> inserirEstado(@RequestBody @Valid Estado estado) {
+	public ResponseEntity<Estado> inserirEstado(@RequestBody @Valid EstadoEnvioDTO dto) {
+		
+		Estado estado = new Estado();
+		estado.setNome_estado(dto.getNome_estado());
 		
 		repE.save(estado);
 		cacheE.limparCache();
@@ -125,21 +129,21 @@ public class EstadoController {
 			summary = "Atualiza um novo estado",
 			tags = {"Estado"})
 	@PutMapping(value = "/atualizar/{id}")
-	public Estado atualizarEstado(@PathVariable Long id, @RequestBody Estado estado) {
+	public ResponseEntity<Estado> atualizarEstado(@PathVariable Long id, @RequestBody EstadoEnvioDTO dto) {
 		
 		Optional<Estado> op = cacheE.findById(id);
 		
 		if(op.isPresent()) {
 			Estado estado_antigo = op.get();
-			estado_antigo.setNome_estado(estado.getNome_estado());
+			estado_antigo.setNome_estado(dto.getNome_estado());
 			
 			repE.save(estado_antigo);
 			cacheE.limparCache();
+			
+			return ResponseEntity.ok(estado_antigo);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		return estado;
 	}
 	
 	// DELETE

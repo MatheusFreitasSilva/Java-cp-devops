@@ -1,10 +1,12 @@
 package com.gs.alagamenos.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -23,6 +25,7 @@ public class Usuario {
 
 	@Schema(description = "Este atributo representa a chave primária ID", example = "1")
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Schema(description = "Este atributo representa o nome de um usuário")
@@ -33,7 +36,7 @@ public class Usuario {
 	@NotNull(message = "Não é permitido a inserção de usuario sem data de nascimento")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@Schema(description = "Este atributo representa o número de telefone de um usuário")
 	@Min(value = 1000000000000L, message = "O telefone deve ter exatamente 13 dígitos")

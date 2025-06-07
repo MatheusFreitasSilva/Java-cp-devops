@@ -4,6 +4,8 @@ import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,6 +22,7 @@ public class Alerta {
 
 	@Schema(description = "Este atributo representa a chave primária ID", example = "1")
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Schema(description = "Este atributo representa a mensagem de um alerta")
