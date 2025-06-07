@@ -24,7 +24,7 @@ Além disso, a aplicação foi construída com foco em **segurança**, integrand
 
 Certifique-se de ter instalado:
 
-- **Java JDK 17** ou superior  
+- **Java JDK 21** ou superior  
 - **Maven** (versão 3.8+)
 - **IDE** como IntelliJ IDEA, Eclipse ou VS Code (com suporte a Java)
 
