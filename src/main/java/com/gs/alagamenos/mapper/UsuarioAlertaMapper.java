@@ -7,6 +7,12 @@ import com.gs.alagamenos.model.UsuarioAlerta;
 
 @Component
 public class UsuarioAlertaMapper {
+	
+private final UsuarioMapper usuarioMapper;
+	
+	public UsuarioAlertaMapper(UsuarioMapper usuarioMapper) {
+        this.usuarioMapper = usuarioMapper;
+    }
 
 	public UsuarioAlertaDTO toDTO(UsuarioAlerta usuarioAlerta) {
 		
@@ -14,7 +20,7 @@ public class UsuarioAlertaMapper {
 		
 		dto.setAlerta(usuarioAlerta.getAlerta());
 		dto.setId(usuarioAlerta.getId());
-		dto.setUsuario(usuarioAlerta.getUsuario());
+		dto.setUsuario(usuarioMapper.toDTO(usuarioAlerta.getUsuario()));
 		
 		return dto;
 	}

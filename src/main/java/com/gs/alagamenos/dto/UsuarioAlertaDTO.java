@@ -10,12 +10,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class UsuarioAlertaDTO {
 
 	private UsuarioAlertaId id;
-	private Usuario usuario;
+	private UsuarioDTO usuario;
 	private Alerta alerta;
 	
 	public UsuarioAlertaDTO() {}
 
-	public UsuarioAlertaDTO(UsuarioAlertaId id, Usuario usuario, Alerta alerta) {
+	public UsuarioAlertaDTO(UsuarioAlertaId id, UsuarioDTO usuario, Alerta alerta) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -30,11 +30,11 @@ public class UsuarioAlertaDTO {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 
