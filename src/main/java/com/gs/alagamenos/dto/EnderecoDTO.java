@@ -12,11 +12,11 @@ public class EnderecoDTO {
 	private long numero_endereco;
 	private String complemento;
 	private Rua rua;
-	private Usuario usuario;
+	private UsuarioDTO usuario;
 	
 	public EnderecoDTO() {}
 
-	public EnderecoDTO(long id, long numero_endereco, String complemento, Rua rua, Usuario usuario) {
+	public EnderecoDTO(long id, long numero_endereco, String complemento, Rua rua, UsuarioDTO usuario) {
 		super();
 		this.id = id;
 		this.numero_endereco = numero_endereco;
@@ -57,11 +57,11 @@ public class EnderecoDTO {
 		this.rua = rua;
 	}
 	
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 	
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 }

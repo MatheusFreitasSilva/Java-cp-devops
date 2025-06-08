@@ -7,6 +7,12 @@ import com.gs.alagamenos.model.Endereco;
 
 @Component
 public class EnderecoMapper {
+	
+	private final UsuarioMapper usuarioMapper;
+	
+	public EnderecoMapper(UsuarioMapper usuarioMapper) {
+        this.usuarioMapper = usuarioMapper;
+    }
 
 	public EnderecoDTO toDTO(Endereco endereco) {
 		
@@ -16,7 +22,7 @@ public class EnderecoMapper {
 		dto.setComplemento(endereco.getComplemento());
 		dto.setNumero_endereco(endereco.getNumero_endereco());
 		dto.setRua(endereco.getRua());
-		dto.setUsuario(endereco.getUsuario());
+		dto.setUsuario(usuarioMapper.toDTO(endereco.getUsuario()));
 		
 		return dto;
 	}

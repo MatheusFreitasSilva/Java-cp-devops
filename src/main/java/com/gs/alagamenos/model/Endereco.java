@@ -24,7 +24,7 @@ public class Endereco {
 	private long id;
 	
 	@Schema(description = "Este atributo representa o número de um endereço")
-	@NotEmpty(message = "Não é permitido a inserção de endereco sem identificação")
+	@NotNull(message = "Não é permitido a inserção de endereco sem identificação")
 	private long numero_endereco;
 	
 	@Schema(description = "Este atributo representa o complemento de endereço. Pode ser nulo.")
@@ -37,7 +37,7 @@ public class Endereco {
 	private Rua rua;
 	
 	@ManyToOne
-	@JoinColumn(name= "BAIRRO_ID", nullable = false)
+	@JoinColumn(name= "USUARIO_ID", nullable = false)
 	@NotNull(message = "Não é permitido incluir endereço sem usuario")
 	@Schema(description = "Este atributo representa a instância de um usuario.")
 	private Usuario usuario;
